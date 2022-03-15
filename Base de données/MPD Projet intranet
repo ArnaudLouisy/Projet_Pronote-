@@ -1,0 +1,100 @@
+CREATE DATABASE IF NOT EXISTS `Intranet` Default CHARACTER SET latin1 COLLATE
+latin1_swedish_ci;
+
+Use `Intranet`;
+
+CREATE TABLE IF NOT EXISTE `classe` (
+
+`id_classe` int(80) NOT NULL AUTO_INCREMENT,
+`specialite` varchar(20) NOT NULL,
+`option` varchar(10) NOT NULL,
+'nb_eleves' int(70) NOT NULL,
+
+PRIMARY KEY(`id_classe`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTE `eleves`(
+`id_eleves` int(80) NOT NULL AUTO_INCREMENT,
+`nom` varchar(20) NOT NULL,
+`prenom` varchar(20) NOT NULL,
+`ville` varchar(20) NOT NULL,
+`cp` int(20),
+`mail` varchar(20),
+'mot_de_passe' varchar(20),
+`ref_classe` int(80) NOT NULL,
+PRIMARY KEY (`id_eleves`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTE `bloc_heure`(
+`id_heure` int(80) NOT NULL AUTO_INCREMENT,
+`jour` varchar(20) NOT NULL ,
+`heure_debut` TIME(20) NOT NULL,
+`heure_fin` TIME (20) NOT NULL,
+`ref_salle` int(80) NOT NULL,
+`ref_prof` int(80) NOT NULL,
+`ref_matiere` int(80) NOT NULL,
+`ref_classe` int(80) NOT NULL,
+PRIMARY KEY (`id_heure`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTE `salle` (
+`id_salle` int (80) NOT NULL AUTO_INCREMENT,
+`num_salle` int (80) NOT NULL,
+PRIMARY KEY (`id_salle`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTE `direction`(
+  `id_direction` int(80) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(80) NOT NULL,
+  `prenom` varchar(80) NOT NULL,
+  `ville` varchar (20) NOT NULL,
+  `cp` int(20) NOT NULL,
+  `mail` varchar(20) NOT NULL,
+  `mot_de_passe` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_direction`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ CREATE TABLE IF NOT EXISTE `matiere`(
+
+   `id_matiere` int(80) NOT NULL AUTO_INCREMENT,
+   `nom_matière` varchar(80) NOT NULL,
+   PRIMARY KEY(`id_direction`)
+ )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTE `devoir`(
+  `id_devoir`int(80) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL,
+  `date_donnee` DATE(20) NOT NULL,
+  `date_rendu` DATE(20) NOT NULL,
+  `ref_prof` int(80) NOT NULL,
+  `ref_eleves` int(80) NOT NULL,
+  PRIMARY KEY(`id_devoir`)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTE `prof`(
+  `id_prof` int(80) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(80) NOT NULL,
+  `prenom` varchar(80) NOT NULL,
+  `ville` varchar (20) NOT NULL,
+  `cp` int(20) NOT NULL,
+  `mail` varchar(20) NOT NULL,
+  `mot_de_passe` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_prof`)
+  )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+  ALTER TABLE `bloc_heure`
+  ADD CONSTRAINT `fk_bloc_heure_salle` FOREIGN KEY(`ref_salle`) REFERENCES `salle`(`id_salle`);
+  ADD CONSTRAINT `fk_bloc_heure_prof`  FOREIGN KEY(`ref_prof`) REFERENCES `prof` (`id_prof`);
+  ADD CONSTRAINT `fk_bloc_heure_matiere`  FOREIGN KEY (`ref_matiere`) REFERENCES `matiere`(`id_matiere`);
+  ADD CONSTRAINT `fk_bloc_heure_classe`  FOREIGN KEY (`ref_classe`) REFERENCES `classe` (`id_classe`);
+
+  ALTER TABLE `devoir`
+  ADD CONSTRAINT `fk_devoir_prof` FOREIGN KEY (`ref_prof`) REFERENCES `prof`(`id_prof`);
+  ADD CONSTRAINT `fk_devoir_eleves` FOREIGN KEY (`ref_eleves`) REFERENCES `eleves`(`id_eleves`);
+
+  ALTER TABLE `eleves`
+  ADD CONSTRAINT `fk_eleves_classe` FOREIGN KEY (`ref_classe`) REFERENCES `classe`(`id_classe`);
+  
