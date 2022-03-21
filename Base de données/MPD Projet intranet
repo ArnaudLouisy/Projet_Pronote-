@@ -3,7 +3,7 @@ latin1_swedish_ci;
 
 Use `Intranet`;
 
-CREATE TABLE IF NOT EXISTE `classe` (
+CREATE TABLE IF NOT EXIST `classe` (
 
 `id_classe` int(80) NOT NULL AUTO_INCREMENT,
 `specialite` varchar(20) NOT NULL,
