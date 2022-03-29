@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'src/bdd/BDD.php';
+require_once '../bdd/BDD.php';
 $bdd = new Bdd();
 
 $req = $bdd->getBdd()->prepare('SELECT * FROM eleves WHERE mail = :mail AND mot_de_passe = :mot_de_passe');
@@ -15,7 +15,7 @@ if ($res) {
     $_SESSION['mail'] = $res['mail'];
     $_SESSION['id_eleves'] = $res['id_eleves'];
 
-    header('Location:../index.html');
+    header('Location:../../index.html');
 }
 else{
     header('Location: connexionEleves.html');

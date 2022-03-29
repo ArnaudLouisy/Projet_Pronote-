@@ -19,7 +19,7 @@
         Ce connecter en tant que Professeur <br> <a class="btn btn-secondary" href="connexionProf.html" role="button">Connexion Professeur</a>
         <br>
         <br>
-        Voir la liste des films ? <br> <a class="btn btn-secondary" href="listfilm.php" role="button">Films</a> <br> <br>
+        Ce connecter en tant que Membre de la Direction  <br> <a class="btn btn-secondary" href="connexionDirection" role="button">Connexion Direction</a> <br> <br>
 
     </div>
 </div>
